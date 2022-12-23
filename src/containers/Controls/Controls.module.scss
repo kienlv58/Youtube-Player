@@ -1,0 +1,46 @@
+.control {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  .play-pause,
+  .speaker {
+    background-color: #6185bb;
+    border: #6185bb;
+    width: 25px;
+    height: 25px;
+    border-radius: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    img {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  .speaker-icon {
+    width: 15px !important;
+    height: 15px !important;
+  }
+  .slider {
+    display: flex;
+    flex: 1;
+    margin: 0 10px;
+  }
+  .back {
+    background-color: #6185bb;
+    color: #000;
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: #6185bb;
+    font-size: 12px;
+    font-weight: 600;
+    min-height: 25px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}

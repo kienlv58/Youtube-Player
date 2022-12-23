@@ -1,22 +1,7 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchVideos } from "src/redux/features/videosSlice";
-import { AppDispatch } from "src/redux/store";
+import ListVideo from "src/containers/ListVideo";
 
 const HomePage = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  useEffect(() => {
-    dispatch(fetchVideos());
-  }, []);
-  return (
-    <div>
-      Home Page
-      <p>
-        <Link to="/video/1">Go to player</Link>
-      </p>
-    </div>
-  );
+  return <ListVideo />;
 };
 
 export default HomePage;

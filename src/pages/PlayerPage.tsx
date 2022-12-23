@@ -1,5 +1,7 @@
+import CustomPlayer from "src/containers/CustomPlayer";
+
 const PlayerPage = () => {
-    return <div>Player Page</div>
-}
+  return <CustomPlayer />;
+};
 
 export default PlayerPage;
