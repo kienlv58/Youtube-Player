@@ -6,7 +6,7 @@ import Loading from "src/components/Loading";
 import Layout from "src/components/Layout";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "src/redux/store";
-import { fetchVideos } from "src/redux/features/videosSlice";
+import { addVideos } from "src/redux/features/videosSlice";
 
 const HomePage = React.lazy(() => import("./pages/HomePage"));
 const PlayerPage = React.lazy(() => import("./pages/PlayerPage"));
@@ -15,7 +15,7 @@ const NotFoundPage = React.lazy(() => import("./pages/NotFoundPage"));
 function App() {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(fetchVideos());
+    dispatch(addVideos());
     return () => {};
   }, []);
 

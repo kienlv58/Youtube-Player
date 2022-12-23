@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RootState } from "src/redux/reducer";
+import { convertSecondToUserView } from "src/utils/helpers";
 
 import styles from "./ListVideo.module.scss";
 
@@ -27,8 +28,8 @@ const ListVideo = () => {
             <div className={styles.info}>
               <p className={styles.title}>{video.metadata?.title}</p>
               <p className={styles.duration}>Duration</p>
-              <p>{video.metadata?.duration}</p>
-              <div className={styles.played}>Played</div>
+              <p>{convertSecondToUserView(video.metadata?.duration || 0)}</p>
+              {video.isPlayed && <div className={styles.played}>Played</div>}
             </div>
           </Link>
         ))}

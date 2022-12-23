@@ -1,8 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player/youtube";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import videoSlice from "src/redux/features/videosSlice";
 import { RootState } from "src/redux/reducer";
+import { AppDispatch } from "src/redux/store";
 import Controls from "../Controls";
 
 import styles from "./CustomPlayer.module.scss";
@@ -20,6 +22,14 @@ const CustomPlayer = () => {
   const video = useSelector((state: RootState) =>
     state.videos.recommendationsList.find((item) => item.metadata?.sid === id),
   );
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (video && video.id && !video.isPlayed) {
+      dispatch(videoSlice.actions.markPlayed(video.id));
+    }
+  }, [video?.id]);
 
   const handleOnPlayPause = () => {
     setPlayer((prev) => ({ ...prev, isPlaying: !prev.isPlaying }));
