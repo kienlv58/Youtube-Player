@@ -12,10 +12,13 @@ interface Props {
   onPlayPause: () => void;
   onSeek: (position: number) => void;
   onMute: () => void;
+  onVolumeChange: (vol: number) => void;
   playing: boolean;
+  volume: number;
   muted: boolean;
   duration: number;
   playedSeconds: number;
+  className?: string;
 }
 
 const Controls = (props: Props) => {
@@ -34,7 +37,7 @@ const Controls = (props: Props) => {
   };
 
   return (
-    <div className={styles.control}>
+    <div className={`${styles.control} ${props.className}`}>
       <button onClick={onClickPlayPause} className={styles["play-pause"]}>
         <img src={props.playing ? playIcon : pauseIcon} alt="control" />
       </button>
@@ -57,13 +60,35 @@ const Controls = (props: Props) => {
           railStyle={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}
         />
       </div>
-      <button onClick={props.onMute} className={styles.speaker}>
-        <img
-          className={styles["speaker-icon"]}
-          src={props.muted ? muteIcon : speakerIcon}
-          alt="speaker"
-        />
-      </button>
+      <div className={styles.speaker}>
+        <button onClick={props.onMute} className={styles.mute}>
+          <img
+            className={styles["speaker-icon"]}
+            src={props.muted ? muteIcon : speakerIcon}
+            alt="speaker"
+          />
+        </button>
+        <div className={styles.volume}>
+          <Slider
+            onChange={(nextValues) => {
+              props.onVolumeChange(nextValues as number);
+            }}
+            vertical
+            value={props.volume}
+            min={0}
+            max={1}
+            defaultValue={0.5}
+            step={0.1}
+            handleStyle={{
+              backgroundColor: "#6185BB",
+              border: "none",
+              opacity: 1,
+            }}
+            trackStyle={{ backgroundColor: "#3B5780" }}
+            railStyle={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}
+          />
+        </div>
+      </div>
       <button onClick={onClickBack} className={styles.back}>
         back to home
       </button>

@@ -4,9 +4,15 @@
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  .play-pause,
-  .speaker {
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: bottom 0.5s;
+  z-index: 100;
+
+  .play-pause {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #6185bb;
     border: #6185bb;
     width: 25px;
@@ -19,6 +25,50 @@
     img {
       width: 12px;
       height: 12px;
+    }
+  }
+  .speaker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .mute {
+      background-color: #6185bb;
+      border: #6185bb;
+      width: 25px;
+      height: 25px;
+      border-radius: 13px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    img {
+      width: 12px;
+      height: 12px;
+    }
+
+    .volume {
+      background-color: rgba(0, 0, 0, 0.5);
+      bottom: 26px;
+      cursor: default;
+      height: 110px;
+      opacity: 0;
+      padding: 10px 0;
+      position: absolute;
+      z-index: 100;
+      transition: visibility 0s, opacity 0.3s linear;
+      visibility: hidden;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &:hover .volume {
+      opacity: 1;
+      visibility: visible;
     }
   }
 
@@ -43,4 +93,8 @@
     margin-left: 10px;
     cursor: pointer;
   }
+}
+
+.in-active {
+  bottom: -40px;
 }

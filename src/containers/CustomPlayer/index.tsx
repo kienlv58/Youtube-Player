@@ -15,6 +15,8 @@ const CustomPlayer = () => {
     isPlaying: false,
     playedSeconds: 0,
     muted: false,
+    volume: 0.5,
+    visibleControl: true,
   });
 
   const playerRef = useRef<ReactPlayer | null>(null);
@@ -31,6 +33,12 @@ const CustomPlayer = () => {
     }
   }, [video?.id]);
 
+  useEffect(() => {
+    if (!player.isPlaying && !player.visibleControl) {
+      setPlayer((prev) => ({ ...prev, visibleControl: true }));
+    }
+  }, [player.isPlaying]);
+
   const handleOnPlayPause = () => {
     setPlayer((prev) => ({ ...prev, isPlaying: !prev.isPlaying }));
   };
@@ -41,11 +49,36 @@ const CustomPlayer = () => {
   };
 
   const handleOnMute = () => {
-    setPlayer((prev) => ({ ...prev, muted: !prev.muted }));
+    setPlayer((prev) => ({
+      ...prev,
+      muted: !prev.muted,
+      volume: !prev.muted ? 0 : prev.volume > 0 ? prev.volume : 0.5,
+    }));
+  };
+
+  const handleOnVolumeChange = (vol: number) => {
+    setPlayer((prev) => ({
+      ...prev,
+      volume: vol,
+      muted: vol > 0 ? false : true,
+    }));
+  };
+
+  const handleOnMouseMove = () => {
+    setPlayer((prev) => ({ ...prev, visibleControl: true }));
+  };
+
+  const handleOnMouseLeave = () => {
+    if (player.isPlaying)
+      setPlayer((prev) => ({ ...prev, visibleControl: false }));
   };
 
   return (
-    <div className={styles.player}>
+    <div
+      className={styles.player}
+      onMouseMove={handleOnMouseMove}
+      onMouseLeave={handleOnMouseLeave}
+    >
       {!video || !video?.metadata?.sid ? (
         <>
           <h2>Video not found</h2>
@@ -60,6 +93,7 @@ const CustomPlayer = () => {
             url={`https://www.youtube.com/watch?v=${video?.metadata?.sid}`}
             playing={player.isPlaying}
             muted={player.muted}
+            volume={player.volume}
             onProgress={(data) => {
               setPlayer((prev) => ({
                 ...prev,
@@ -82,7 +116,12 @@ const CustomPlayer = () => {
           />
 
           <Controls
+            className={
+              player.visibleControl ? styles.control : styles["in-active"]
+            }
             muted={player.muted}
+            volume={player.volume}
+            onVolumeChange={handleOnVolumeChange}
             onMute={handleOnMute}
             onPlayPause={handleOnPlayPause}
             onSeek={handleSeek}

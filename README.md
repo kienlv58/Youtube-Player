@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# Getting Started with Create React App Typescript
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Operation and Build environment
+
+- Node.js `^16.15.0`
+- npm `^8.5.5`
+
+- React `^18.2.0`
+- TypeScript `^4.9.4`
 
 ## Available Scripts
 
@@ -39,8 +47,79 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### `npm run lint`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Check the linting code
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `npm run lint:fix`
+
+Auto fix the code by lint rule
+
+## What's Included?
+
+- **Navigation System**
+  - React Router Dom V6
+- **State Management**
+  - React-redux + Redux-toolkit + Redux-thunk
+- **Code-format and check**
+  - Eslint
+  - Tslint
+  - Prettier
+- **CSS**
+  - Sass
+  - Css module
+
+## Base Project Structure
+
+```
+├───src
+│   ├───@type
+│   ├───asserts
+│   │   ├───fonts
+│   │   ├───icons
+│   │   ├───images
+│   ├───components
+│   │   ├───Layout
+│   │   ├───Loading
+│   │   └───Others...
+│   ├───containers
+│   │   ├───Controls
+│   │   └───Others...
+│   ├───context
+│   │   ├───OthersContext...
+│   ├───hooks
+│   │   └───custom-hook...
+│   ├───pages
+│   │   ├───HomePage
+│   │   └───OthersPage...
+│   ├───redux
+│   │   ├───features
+│   │   ├───reducer.ts
+│   │   └───store.ts
+│   ├───services
+│   │   ├───Http-Client
+│   │   └───OthersService...
+│   └───utils
+├───eslintrc.json
+├───.gitignore
+├───.prettierrc
+├───App.css
+├───App.tsx
+├───README.md
+├───index.module.scss
+├───index.tsx
+├───package-lock.json
+├───package.json
+├───tsconfig.json
+├───...
+```
+
+## Some popular library may we need in the next feature
+
+- Redux Thunk/Saga + Redux Persist
+- React Query
+- React Hook Form/React Formik
+- I18n
+- Lodash
+- Axios
+- Husky + lint-staged for pre-commit check
