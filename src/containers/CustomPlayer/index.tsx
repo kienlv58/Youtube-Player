@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { OnProgressProps } from "react-player/base";
 import ReactPlayer from "react-player/youtube";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -73,6 +74,29 @@ const CustomPlayer = () => {
       setPlayer((prev) => ({ ...prev, visibleControl: false }));
   };
 
+  const handleOnProgress = (data: OnProgressProps) => {
+    setPlayer((prev) => ({
+      ...prev,
+      playedSeconds: data.playedSeconds,
+    }));
+  };
+
+  const handleOnEnded = () => {
+    setPlayer((prev) => ({ ...prev, isPlaying: false }));
+  };
+
+  const handleOnPause = () => {
+    if (player.isPlaying) {
+      setPlayer((prev) => ({ ...prev, isPlaying: false }));
+    }
+  };
+
+  const handleOnPlay = () => {
+    if (!player.isPlaying) {
+      setPlayer((prev) => ({ ...prev, isPlaying: true }));
+    }
+  };
+
   return (
     <div
       className={styles.player}
@@ -94,25 +118,10 @@ const CustomPlayer = () => {
             playing={player.isPlaying}
             muted={player.muted}
             volume={player.volume}
-            onProgress={(data) => {
-              setPlayer((prev) => ({
-                ...prev,
-                playedSeconds: data.playedSeconds,
-              }));
-            }}
-            onEnded={() => {
-              setPlayer((prev) => ({ ...prev, isPlaying: false }));
-            }}
-            onPause={() => {
-              if (player.isPlaying) {
-                setPlayer((prev) => ({ ...prev, isPlaying: false }));
-              }
-            }}
-            onPlay={() => {
-              if (!player.isPlaying) {
-                setPlayer((prev) => ({ ...prev, isPlaying: true }));
-              }
-            }}
+            onProgress={handleOnProgress}
+            onEnded={handleOnEnded}
+            onPause={handleOnPause}
+            onPlay={handleOnPlay}
           />
 
           <Controls

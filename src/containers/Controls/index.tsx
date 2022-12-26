@@ -32,10 +32,6 @@ const Controls = (props: Props) => {
     props.onPlayPause();
   };
 
-  const handleSeek = (position: number) => {
-    props.onSeek(position);
-  };
-
   return (
     <div className={`${styles.control} ${props.className}`}>
       <button onClick={onClickPlayPause} className={styles["play-pause"]}>
@@ -44,7 +40,7 @@ const Controls = (props: Props) => {
       <div className={styles.slider}>
         <Slider
           onChange={(nextValues) => {
-            handleSeek(nextValues as number);
+            props.onSeek(nextValues as number);
           }}
           value={props.playedSeconds}
           min={0}

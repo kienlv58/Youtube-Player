@@ -3,7 +3,7 @@ import { RecommendationInfo } from "src/gRPC/rooms/models_pb";
 import { ListRecommendationsResponse } from "src/gRPC/rooms/services.public_pb";
 import { getRecommendations } from "src/services";
 
-interface VideoInfo extends RecommendationInfo.AsObject {
+export interface VideoInfo extends RecommendationInfo.AsObject {
   isPlayed?: boolean;
 }
 
